@@ -383,6 +383,7 @@ fetch("http://localhost:8000/api/me") // hard-coded origin, no types, no auth he
 
 ```bash
 pnpm install
+pnpm run dev          # API (:8000) + web (Vite) via concurrently
 pnpm run app:web dev
 pnpm run service:api
 pnpm run db:create

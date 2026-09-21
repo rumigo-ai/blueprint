@@ -27,6 +27,7 @@ Monorepo scaffold: **Vite** web app + **FastAPI** / SQLModel backend, with an em
 | `db:clean` | Truncate all tables in `public` |
 | `db:make` | Alembic autogenerate revision |
 | `db:upgrade` | Alembic upgrade head |
+| `dev` | Run API + web together via `concurrently` |
 | `app:web` | `pnpm --dir apps/web run <script>` |
 | `service:api` | Uvicorn `src.services.api.app:app` on `:8000` |
 | `app:clean:all` | Remove root/app `node_modules` and `dist` |
