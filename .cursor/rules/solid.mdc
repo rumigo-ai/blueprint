@@ -1,0 +1,22 @@
+---
+description: Apply SOLID layering when writing or refactoring code
+alwaysApply: true
+---
+
+# SOLID
+
+Full reference: [`.agents/rules/solid.md`](../../.agents/rules/solid.md).
+
+| Letter | Repo rule |
+|--------|-----------|
+| **S** | Routes ≠ auth ≠ DB ≠ models |
+| **O** | Add route/lib modules; avoid editing `clerk.py`/`db.py` per feature |
+| **I** | Depend on `ClerkIdentityDep` + `get_session` |
+| **D** | Libs never import routes |
+
+```text
+✅ route → Depends → lib → models
+❌ route → Clerk + Engine + SQL + business rules
+```
+
+If Clerk changes and a non-auth file must change, SRP was violated.

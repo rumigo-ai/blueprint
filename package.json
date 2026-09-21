@@ -1,0 +1,20 @@
+{
+  "name": "blueprint",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Blueprint monorepo scaffold (Vite web + FastAPI, empty infra)",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "scripts": {
+    "db:create": "python scripts/run.py db:create",
+    "db:clean": "python scripts/run.py db:clean",
+    "db:make": "python scripts/run.py db:make",
+    "db:upgrade": "python scripts/run.py db:upgrade",
+    "app:web": "python scripts/run.py app:web",
+    "service:api": "python scripts/run.py service:api",
+    "app:clean:all": "pnpm dlx rimraf node_modules apps/web/node_modules apps/web/dist",
+    "app:clean:install": "pnpm run app:clean:all && pnpm install"
+  },
+  "dependencies": {}
+}

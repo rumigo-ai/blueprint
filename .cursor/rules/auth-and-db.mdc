@@ -1,0 +1,57 @@
+---
+description: How to structure Clerk auth and database session modules
+globs: src/lib/auth/**/*.py,src/lib/db.py,src/services/api/routes/**/*.py
+alwaysApply: false
+---
+
+# Auth and database
+
+Full reference: [`.agents/rules/auth-and-db.md`](../../.agents/rules/auth-and-db.md).
+
+## `src/lib/auth/clerk.py`
+
+Verify Bearer JWT → `ClerkIdentity`. Do not open DB or create users here.
+
+```python
+@dataclass(frozen=True, slots=True)
+class ClerkIdentity:
+    user_id: str
+    email: str | None = None
+
+ClerkIdentityDep = Annotated[ClerkIdentity, Depends(require_clerk_identity)]
+```
+
+`User.id` == Clerk `sub` == `identity.user_id`. Use `Unauthorized` / `Unprocessable`.
+
+## `src/lib/db.py`
+
+Build URLs from `DATABASE_*`; expose `get_session` and `sync_database_url()` for Alembic.
+
+```python
+async def get_session() -> AsyncGenerator[AsyncSession, None]:
+    async with AsyncSessionLocal() as session:
+        try:
+            yield session
+            await session.commit()
+        except Exception:
+            await session.rollback()
+            raise
+        finally:
+            await session.close()
+```
+
+## Routes
+
+```python
+@router.get("/me", response_model=User)
+async def get_me(
+    identity: ClerkIdentityDep,
+    session: Annotated[AsyncSession, Depends(get_session)],
+) -> User:
+    user = await session.get(User, identity.user_id)
+    if user is None:
+        raise NotFound("User not found")
+    return user
+```
+
+Do not construct Clerk clients or engines inside route handlers.

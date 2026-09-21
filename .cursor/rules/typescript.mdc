@@ -1,0 +1,51 @@
+---
+description: TypeScript and Vite web conventions for apps/web
+globs: apps/web/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# TypeScript (`apps/web`)
+
+Full reference: [`AGENTS.md`](../../AGENTS.md) and [`.agents/rules/typescript.md`](../../.agents/rules/typescript.md).
+
+## Layout
+
+- `api/` — typed HTTP helpers (not `services/`)
+- `components/` — kebab-case; auth under `components/auth/`
+- `hooks/`, `lib/`, `stat/`, `styles/`, `types/`
+- `main.tsx` wraps `ClerkProvider`; styles from `styles/index.css` / `styles/app.css`
+- Path alias `@/` → `src/`
+
+## Types
+
+- Strict TS; no implicit `any`
+- Prefer `type` for props/DTOs; use `import type` for type-only imports
+- Extend `vite-env.d.ts` when adding `VITE_*` keys
+
+## Clerk — fail loud
+
+```tsx
+const key = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+if (!key) throw new Error("Missing VITE_CLERK_PUBLISHABLE_KEY")
+
+<ClerkProvider publishableKey={key}>
+  <Show when="signed-out"><SignInPage /></Show>
+  <Show when="signed-in"><AuthShell><App /></AuthShell></Show>
+</ClerkProvider>
+```
+
+Do not add a setup/fallback UI when keys are missing.
+
+## API helper
+
+```ts
+export async function fetchMe(token: string): Promise<UserDto> {
+  const res = await fetch(`${apiBaseUrl()}/api/me`, {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+  if (!res.ok) throw new Error(`GET /api/me failed: ${res.status}`)
+  return res.json() as Promise<UserDto>
+}
+```
+
+Never hard-code API origins in components.

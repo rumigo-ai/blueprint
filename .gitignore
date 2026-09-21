@@ -1,0 +1,86 @@
+# =========================
+# Environment & secrets
+# =========================
+.env
+.env.local
+.env.*.local
+!.env.example
+!.env.example.api
+apps/*/.env
+apps/*/.env.local
+!apps/*/.env.example
+
+# =========================
+# Python
+# =========================
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+/lib/
+/lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing & coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.ruff_cache/
+
+# =========================
+# Node / pnpm
+# =========================
+node_modules/
+.pnpm-store/
+.npm
+.yarn-integrity
+*.tsbuildinfo
+apps/*/node_modules/
+apps/*/pnpm-lock.yaml
+apps/*/pnpm-workspace.yaml
+apps/*/.pnpm-store/
+
+# =========================
+# Vite / frontend build
+# =========================
+apps/*/dist/
+apps/*/dist-ssr/
+
+# =========================
+# OS & editors
+# =========================
+.DS_Store
+.DS_Store?
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# =========================
+# Logs & debug
+# =========================
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*

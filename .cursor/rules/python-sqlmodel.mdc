@@ -1,0 +1,39 @@
+---
+description: Python SQLModel folder structure, typing, and Alembic barrel policy
+globs: src/**/*.py
+alwaysApply: false
+---
+
+# Python / SQLModel
+
+Full reference: [`AGENTS.md`](../../AGENTS.md) and [`.agents/rules/python-sqlmodel.md`](../../.agents/rules/python-sqlmodel.md).
+
+## Layout
+
+- `src/models/` — tables + Create/Update/Delete schemas
+- `src/models/__init__.py` — **only** `table=True` classes
+- `src/enums/` — `StrEnum` only
+- `src/constants/model.py` — `ORM_METADATA`
+- `src/lib/` — auth, db, exceptions (not table models)
+- `src/services/api/routes/` — thin handlers
+
+## `__init__.py`
+
+Only `src/models/__init__.py` is allowed. Ask before adding any other.
+
+## Model example
+
+```python
+class User(UserBase, TimestampMixin, VerificationMixin, Base, table=True):
+    __tablename__ = "users"
+    id: str = Field(primary_key=True, max_length=255)  # Clerk sub
+    onboarding_done: bool = Field(default=False)
+```
+
+Mixins in `models/common.py`. Base in `models/base.py`.
+
+## Typing
+
+- `from __future__ import annotations`
+- `X | None`; `Annotated[T, Depends(...)]`
+- Migrations: autogenerate only (`pnpm run db:make`)

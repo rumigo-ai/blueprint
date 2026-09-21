@@ -1,0 +1,2 @@
+Generic single-database configuration with an async SQLAlchemy engine.
+See `env.py` for how the URL is loaded from the root `.env`.

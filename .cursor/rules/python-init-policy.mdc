@@ -1,0 +1,12 @@
+---
+description: Restrict __init__.py to the SQLModel Alembic barrel only
+globs: src/**/*.py
+alwaysApply: false
+---
+
+# Python `__init__.py` policy
+
+- Do not create `__init__.py` by default.
+- Only allowed file: `src/models/__init__.py`.
+- That barrel must import **table** models only (`table=True`), not `*Create` / `*Update` / `*Delete`.
+- Ask the user before adding any other `__init__.py`.

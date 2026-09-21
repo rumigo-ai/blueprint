@@ -1,0 +1,17 @@
+---
+description: Follow root AGENTS.md for all Blueprint coding agents
+alwaysApply: true
+---
+
+# Shared agent policy
+
+Follow [`AGENTS.md`](../../AGENTS.md) at the repo root for TypeScript, Python/SQLModel, SOLID, auth/db layout, and git commits.
+
+Modular twins: [`.agents/rules/`](../../.agents/rules/). Prefer matching existing `src/lib/auth/clerk.py`, `src/lib/db.py`, and `src/models/user.py` patterns.
+
+Non-negotiables from AGENTS.md:
+
+- Only `__init__.py` allowed: `src/models/__init__.py` (table barrel for Alembic)
+- Autogenerate migrations only (`pnpm run db:make`)
+- No secrets in git; no inventing infra/CDK unless asked
+- Fail loud if Clerk/env keys are missing (no silent auth fallback UI)
