@@ -1,9 +1,8 @@
 import { SignIn } from '@clerk/react'
-import '@/components/auth/sign-in-page.css'
 
 export function SignInPage() {
   return (
-    <main className="sign-in-page">
+    <main className="grid min-h-svh place-items-center bg-background p-6 text-foreground">
       <SignIn />
     </main>
   )

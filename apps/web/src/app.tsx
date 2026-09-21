@@ -1,122 +1,46 @@
-import { useState } from 'react'
-import heroImg from '@/assets/hero.png'
-import reactLogo from '@/assets/react.svg'
-import viteLogo from '@/assets/vite.svg'
-import '@/styles/app.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/app.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-6 py-10">
+      <div className="space-y-2">
+        <p className="font-brand text-sm font-bold tracking-[0.05em] text-muted-foreground">
+          Blueprint
+        </p>
+        <h1 className="font-display text-4xl font-light tracking-tight text-foreground md:text-5xl">
+          Hiring workflows, automated
+        </h1>
+        <p className="max-w-xl text-base text-muted-foreground">
+          Design node-based hiring flows, run verifications and contracts, and
+          watch job listings move through your pipeline.
+        </p>
+      </div>
+
+      <div className="rounded-[20px] border border-border bg-card p-6 text-card-foreground shadow-none">
+        <p className="text-sm text-muted-foreground">
+          Theme tokens from pilot-dashboard (Rumigo parchment). Use Tailwind
+          utilities like{' '}
+          <code className="font-mono text-xs text-foreground">bg-background</code>
+          ,{' '}
+          <code className="font-mono text-xs text-foreground">font-display</code>
+          , and{' '}
+          <code className="font-mono text-xs text-foreground">text-muted-foreground</code>
+          .
+        </p>
+      </div>
+
+      <div className="flex flex-wrap gap-3">
         <button
           type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+          className="rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground"
         >
-          Count is {count}
+          Primary action
         </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+        <button
+          type="button"
+          className="rounded-full border border-border bg-transparent px-5 py-2.5 text-sm font-medium text-foreground"
+        >
+          Secondary
+        </button>
+      </div>
+    </main>
   )
 }
-
-export default App
